@@ -1,286 +1,151 @@
-<!DOCTYPE html>
-<html lang="pt">
+ <!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta de Projeto - Eco-Ipil</title>
+    <title>Calendário de Provas</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-        :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
-            --dark-color: #2c3e50;
-            --light-color: #ffffff;
-            --background-color: #f7f9fc;
-            --text-color: #555;
-            --heading-color: #333;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.8;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
             margin: 0;
-            padding: 0;
-            -webkit-print-color-adjust: exact; /* Garante que as cores de fundo sejam impressas */
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 40px;
-            background-color: var(--light-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border-radius: 12px;
-        }
-
-        .header {
-            text-align: center;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-        }
-
-        .header .icon {
-            font-size: 4rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            color: var(--heading-color);
-            margin: 0;
-            font-weight: 700;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            margin-top: 5px;
-            font-style: italic;
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            color: var(--dark-color);
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
-            margin: 40px 0 20px 0;
-            font-weight: 600;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            color: var(--heading-color);
-            margin-top: 30px;
-            font-weight: 600;
-        }
-
-        blockquote {
-            border-left: 4px solid var(--secondary-color);
-            background-color: #f0fff4;
             padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-style: italic;
             color: #333;
         }
 
-        .step-list {
+        .calendar-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #003366;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .week-section {
+            margin-bottom: 40px;
+        }
+
+        .week-title {
+            background: #007BFF;
+            color: white;
+            padding: 15px;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .exam-list {
             list-style: none;
             padding-left: 0;
+            border: 1px solid #ddd;
+            border-top: none;
         }
 
-        .step-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+        .exam-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
         }
 
-        .step-list .emoji {
-            font-size: 1.8rem;
-            margin-right: 15px;
-            background-color: color-mix(in srgb, var(--primary-color) 15%, transparent);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .exam-item:last-child {
+            border-bottom: none;
         }
 
-        .highlight {
-            font-weight: 600;
-            color: var(--secondary-color);
+        .exam-day {
+            font-weight: bold;
+            color: #003366;
         }
 
-        .section-summary {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 1.2rem;
-            margin-top: 20px;
+        .exam-time {
+            color: #555;
+            font-style: italic;
         }
 
-        .advantages-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
-        
-        .advantages-grid ul {
-            list-style: none;
-            padding-left: 0;
+        .exam-subject {
+            font-weight: bold;
+            color: #FF6F61;
         }
 
-        .advantages-grid li {
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: 10px;
-        }
-
-        .advantages-grid .advantage::before {
-            content: '✅';
-            position: absolute;
-            left: 0;
-        }
-
-        .advantages-grid .challenge::before {
-            content: '📶'; /* Exemplo, pode ser outro emoji */
-            position: absolute;
-            left: 0;
-        }
-        
-        .impact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .impact-card {
-            background: var(--background-color);
-            padding: 20px;
-            border-radius: 8px;
-            border-top: 4px solid var(--primary-color);
-        }
-
-        .impact-card .emoji {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 2px solid var(--primary-color);
-            color: var(--text-color);
-        }
-
-        .footer strong {
-            color: var(--heading-color);
+        .exam-note {
+            color: #FF6F61;
+            font-style: italic;
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                margin: 20px;
-            }
-            .advantages-grid, .impact-grid {
-                grid-template-columns: 1fr;
+            .calendar-container {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="calendar-container">
+        <h1>Calendário de Provas</h1>
 
-    <div class="container">
-
-        <div class="header">
-            <div class="icon">♻️</div>
-            <h1>PROJETO ECO-IPIL</h1>
-            <p>Transformando Lixo em Oportunidade.</p>
+        <!-- Primeira semana -->
+        <div class="week-section">
+            <div class="week-title">Primeira semana (5 a 9/1/2026)</div>
+            <ul class="exam-list">
+                <li class="exam-item">
+                    <span class="exam-day">Quarta</span> 
+                    <span class="exam-time">14:30 - </span>
+                    <span class="exam-subject">Inglês</span>
+                    <span class="exam-note">(defesa)</span>
+                </li>
+                <li class="exam-item">
+                    <span class="exam-day">Sexta-feira</span> 
+                    <span class="exam-time">13:00 - </span>
+                    <span class="exam-subject">Álgebra</span>
+                </li>
+            </ul>
         </div>
 
-        <section>
-            <h2>A Ideia Principal: Reciclar Tornou-se um Jogo Lucrativo</h2>
-            <blockquote>
-                O Eco-Ipil é uma plataforma digital que transforma o ato de reciclar numa experiência <strong>fácil, divertida e recompensadora.</strong> Pense nele como um jogo para a sua cidade, onde todos ganham.
-            </blockquote>
-            
-            <ul class="step-list">
-                <li><span class="emoji">🗺️</span> <div><strong>Encontre:</strong> Através do nosso aplicativo, você localiza o "Ecoponto" (ponto de coleta inteligente) mais próximo de si.</div></li>
-                <li><span class="emoji">🚮</span> <div><strong>Recicle:</strong> Você deposita os seus materiais recicláveis (plástico, metal, vidro, papel). Um agente no local verifica, pesa o material e gera um código QR único.</div></li>
-                <li><span class="emoji">💰</span> <div><strong>Ganhe:</strong> Você simplesmente escaneia o código com o seu telemóvel e... pronto! Você ganha pontos na sua carteira digital, que podem ser trocados por recompensas reais.</div></li>
+        <!-- Segunda semana -->
+        <div class="week-section">
+            <div class="week-title">Segunda semana (12 a 16/1/2026)</div>
+            <ul class="exam-list">
+                <li class="exam-item">
+                    <span class="exam-day">Segunda</span> 
+                    <span class="exam-time">13:00 - </span>
+                    <span class="exam-subject">CDI</span>
+                </li>
+                <li class="exam-item">
+                    <span class="exam-day">Quinta</span> 
+                    <span class="exam-time">13:00 - </span>
+                    <span class="exam-subject">MIC</span>
+                    <span class="exam-note">(defesa)</span>
+                </li>
+                <li class="exam-item">
+                    <span class="exam-day">Sexta</span> 
+                    <span class="exam-time">13:00 - </span>
+                    <span class="exam-subject">IENF</span>
+                </li>
             </ul>
+        </div>
 
-            <div class="section-summary">
-                Em resumo: <strong>transformamos o lixo, que seria um custo para a cidade, num tesouro para si.</strong>
-            </div>
-        </section>
-
-        <section>
-            <h2>As Vantagens (e os Desafios a Superar)</h2>
-            <p>Como qualquer projeto inovador, o Eco-Ipil tem pontos fortes incríveis e alguns desafios que estamos prontos para enfrentar.</p>
-            <div class="advantages-grid">
-                <div>
-                    <h3>Vantagens Brilhantes</h3>
-                    <ul>
-                        <li class="advantage"><strong>Recompensa Direta:</strong> Pela primeira vez, você é pago para fazer a coisa certa. O incentivo financeiro é o motor mais poderoso.</li>
-                        <li class="advantage"><strong>Simplicidade Extrema:</strong> O aplicativo mostra o caminho, e o processo é tão simples quanto escanear um código.</li>
-                        <li class="advantage"><strong>Dados Inteligentes:</strong> A plataforma gera dados em tempo real para uma gestão de resíduos muito mais eficiente e económica.</li>
-                        <li class="advantage"><strong>Economia Circular na Prática:</strong> Criamos matéria-prima para novas indústrias, gerando mais empregos e movimentando a economia.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>Possíveis Contras (Desafios)</h3>
-                    <ul>
-                        <li class="challenge"><strong>Dependência Tecnológica:</strong> O sistema depende de smartphones e internet. Soluções alternativas, como cartões, serão criadas.</li>
-                        <li class="challenge"><strong>Logística Eficiente:</strong> O sucesso depende de uma coleta rápida e regular dos materiais nos Ecopontos para manter a confiança.</li>
-                        <li class="challenge"><strong>Adesão Inicial:</strong> Precisamos de uma "massa crítica" de utilizadores e Ecopontos para que o sistema se torne autossustentável.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h2>O Impacto Social: Uma Revolução Comunitária</h2>
-            <p>O verdadeiro poder do Eco-Ipil não está apenas na tecnologia, mas na transformação social que ele inspira.</p>
-
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <span class="emoji">🏙️</span>
-                    <h3>Cidades Mais Limpas</h3>
-                    <p>Menos poluição e doenças, resultando num ambiente mais agradável e seguro para todos.</p>
-                </div>
-                <div class="impact-card">
-                    <span class="emoji">💸</span>
-                    <h3>Nova Fonte de Renda</h3>
-                    <p>Capacitamos pessoas, dando-lhes dignidade e uma forma de ganhar a vida de maneira honesta e sustentável.</p>
-                </div>
-                <div class="impact-card">
-                    <span class="emoji">🧠</span>
-                    <h3>Educação Ambiental</h3>
-                    <p>Ensinamos sobre sustentabilidade de uma forma que todos entendem: através de benefícios diretos.</p>
-                </div>
-                <div class="impact-card">
-                    <span class="emoji">🤝</span>
-                    <h3>Comunidade Fortalecida</h3>
-                    <p>Criamos um objetivo comum, gerando um sentimento de orgulho e responsabilidade coletiva.</p>
-                </div>
-            </div>
-        </section>
-        
+        <!-- Terceira semana -->
+        <div class="week-section">
+            <div class="week-title">Terceira semana (19 a 23/1/2026)</div>
+            <ul class="exam-list">
+                <li class="exam-item">
+                    <span class="exam-day">Terça</span> 
+                    <span class="exam-time">12:30 - </span>
+                    <span class="exam-subject">Algoritmo</span>
+                </li>
+                <li class="exam-item">
+                    <span class="exam-day">Quarta</span> 
+                    <span class="exam-time">16:15 - </span>
+                    <span class="exam-subject">PIT</span>
+                </li>
+            </ul>
+        </div>
     </div>
-
 </body>
 </html>
